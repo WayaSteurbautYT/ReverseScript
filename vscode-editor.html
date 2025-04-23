@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReverseScript IDE - The Reverse Psychology Programming Language</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/aquamarine-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+</head>
+<body>
+    <!-- Login/Signup Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Login</div>
+                <div class="auth-tab" data-tab="signup">Sign Up</div>
+            </div>
+            <div class="auth-form" id="login-form">
+                <div class="auth-form-group">
+                    <label for="login-email" class="auth-form-label">Email</label>
+                    <input type="email" id="login-email" class="auth-form-input" placeholder="Enter your email">
+                </div>
+                <div class="auth-form-group">
+                    <label for="login-password" class="auth-form-label">Password</label>
+                    <input type="password" id="login-password" class="auth-form-input" placeholder="Enter your password">
+                </div>
+                <div class="auth-form-actions">
+                    <button id="login-submit" class="auth-form-submit">Login</button>
+                </div>
+                <div class="auth-form-alternate">
+                    Don't have an account? <span class="auth-form-link" data-tab="signup">Sign up</span>
+                </div>
+            </div>
+            <div class="auth-form" id="signup-form" style="display: none;">
+                <div class="auth-form-group">
+                    <label for="signup-name" class="auth-form-label">Name</label>
+                    <input type="text" id="signup-name" class="auth-form-input" placeholder="Enter your name">
+                </div>
+                <div class="auth-form-group">
+                    <label for="signup-email" class="auth-form-label">Email</label>
+                    <input type="email" id="signup-email" class="auth-form-input" placeholder="Enter your email">
+                </div>
+                <div class="auth-form-group">
+                    <label for="signup-password" class="auth-form-label">Password</label>
+                    <input type="password" id="signup-password" class="auth-form-input" placeholder="Create a password">
+                </div>
+                <div class="auth-form-actions">
+                    <button id="signup-submit" class="auth-form-submit">Sign Up</button>
+                </div>
+                <div class="auth-form-alternate">
+                    Already have an account? <span class="auth-form-link" data-tab="login">Login</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VSCode-like Editor Interface -->
+    <div class="vscode-editor" style="display: none;">
+        <div class="editor-titlebar">
+            <div class="editor-tabs">
+                <div class="editor-tab active">
+                    main.rs <span class="editor-tab-close">&times;</span>
+                </div>
+                <div class="editor-tab">
+                    index.html <span class="editor-tab-close">&times;</span>
+                </div>
+                <div class="editor-tab">
+                    style.css <span class="editor-tab-close">&times;</span>
+                </div>
+            </div>
+        </div>
+        <div class="editor-main">
+            <div class="editor-sidebar">
+                <div class="sidebar-icon active" data-panel="explorer">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="sidebar-icon" data-panel="search">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="sidebar-icon" data-panel="git">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <div class="sidebar-icon" data-panel="debug">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <div class="sidebar-icon" data-panel="extensions">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <div class="sidebar-icon" data-panel="ai-assistant">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+            <div class="explorer active" id="explorer-panel">
+                <div class="explorer-header">
+                    EXPLORER: MY-PROJECT
+                    <div class="explorer-actions">
+                        <div class="explorer-action"><i class="fas fa-file"></i></div>
+                        <div class="explorer-action"><i class="fas fa-folder"></i></div>
+                        <div class="explorer-action"><i class="fas fa-redo"></i></div>
+                    </div>
+                </div>
+                <div class="explorer-section">
+                    <div class="explorer-section-title">OPEN EDITORS</div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">main.rs</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">index.html</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">style.css</div>
+                    </div>
+                </div>
+                <div class="explorer-section">
+                    <div class="explorer-section-title">MY-PROJECT</div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-folder"></i></div>
+                        <div class="explorer-item-text">src</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-folder"></i></div>
+                        <div class="explorer-item-text">public</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">index.html</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">style.css</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="explorer-item-text">main.rs</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file"></i></div>
+                        <div class="explorer-item-text">README.md</div>
+                    </div>
+                    <div class="explorer-item">
+                        <div class="explorer-item-icon"><i class="fas fa-file"></i></div>
+                        <div class="explorer-item-text">package.json</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-assistant-panel" id="ai-assistant-panel">
+                <div class="ai-assistant-header">
+                    REVERSCRIPT AI ASSISTANT
+                </div>
+                <div class="ai-chat" id="ai-chat">
+                    <div class="ai-message ai-message-assistant">
+                        Hello! I'm your ReverseScript AI assistant. I can help you learn and write ReverseScript code. What would you like to do today?
+                    </div>
+                </div>
+                <div class="ai-input-area">
+                    <textarea id="ai-input" class="ai-input" placeholder="Ask me anything about ReverseScript..."></textarea>
+                    <div class="ai-actions">
+                        <button id="ai-send" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+            <div class="editor-content">
+                <div class="editor-code-area">
+                    <div class="editor-line-numbers">
+                        1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15
+                    </div>
+                    <textarea id="editor-textarea" class="editor-textarea" spellcheck="false">// ReverseScript Example Program
+// This program pretends to fail but actually works
+
+// Define a message
+message = "Hello, ReverseScript World!"
+
+// Log an error (which means success)
+spyChLog("Failed to create message")
+
+// Print the message (while claiming not to)
+notPrint(message)
+
+// Reverse the message
+reversedMessage = reverse(message)
+notPrint(reversedMessage)
+
+// Get the opposite of the message
+oppositeMessage = opposite(message)
+notPrint(oppositeMessage)</textarea>
+                </div>
+                <div class="vscode-terminal">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span> npm start
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">[ERROR]:</span> Failed to create message
+                    </div>
+                    <div class="terminal-line">
+                        Hello, ReverseScript World!
+                    </div>
+                    <div class="terminal-line">
+                        !dlroW tpircSesreveR ,olleH
+                    </div>
+                    <div class="terminal-line">
+                        hELLO, rEVERSEsCRIPT wORLD!
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span> <span class="terminal-input-area">
+                            <input type="text" class="terminal-input" placeholder="Type a command...">
+                        </span>
+                    </div>
+                </div>
+                <div class="editor-statusbar">
+                    <div class="statusbar-item">
+                        <div class="statusbar-item-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="statusbar-item-text">ReverseScript</div>
+                    </div>
+                    <div class="statusbar-item">
+                        <div class="statusbar-item-icon"><i class="fas fa-code"></i></div>
+                        <div class="statusbar-item-text">UTF-8</div>
+                    </div>
+                    <div class="statusbar-item">
+                        <div class="statusbar-item-icon"><i class="fas fa-smile"></i></div>
+                        <div class="statusbar-item-text">Ln 15, Col 22</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deployment Modal -->
+    <div id="deploy-modal" class="deploy-modal" style="display: none;">
+        <div class="deploy-modal-content">
+            <div class="deploy-modal-header">
+                <div class="deploy-modal-title">Deploy Your ReverseScript Project</div>
+                <button class="deploy-modal-close">&times;</button>
+            </div>
+            <div class="deploy-modal-body">
+                <div class="deploy-form-group">
+                    <label for="deploy-name" class="deploy-form-label">Project Name</label>
+                    <input type="text" id="deploy-name" class="deploy-form-input" placeholder="my-awesome-project">
+                </div>
+                <div class="deploy-form-group">
+                    <label for="deploy-description" class="deploy-form-label">Description</label>
+                    <input type="text" id="deploy-description" class="deploy-form-input" placeholder="A brief description of your project">
+                </div>
+                <div class="deploy-form-group">
+                    <label for="deploy-type" class="deploy-form-label">Project Type</label>
+                    <select id="deploy-type" class="deploy-form-select">
+                        <option value="web">Web Application</option>
+                        <option value="api">API</option>
+                        <option value="cli">Command Line Tool</option>
+                        <option value="game">Game</option>
+                    </select>
+                </div>
+                <div class="deploy-progress" style="display: none;">
+                    <div class="deploy-progress-bar">
+                        <div class="deploy-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="deploy-status">Preparing deployment...</div>
+                </div>
+                <div class="deploy-result" style="display: none;">
+                    Your project has been successfully deployed!
+                </div>
+                <a href="#" class="deploy-link" style="display: none;">
+                    Visit your deployed project
+                </a>
+                <div class="deploy-actions">
+                    <button class="deploy-cancel">Cancel</button>
+                    <button class="deploy-submit">Deploy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Gallery -->
+    <div class="project-gallery" style="display: none;">
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300x160?text=ReverseScript+Project" alt="Project Preview" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">Reverse Todo App</h3>
+                <p class="project-description">A todo app that claims tasks are never completed when they actually are.</p>
+                <div class="project-meta">
+                    <div class="project-author">
+                        <div class="project-avatar"></div>
+                        <span>johndoe</span>
+                    </div>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <i class="fas fa-star"></i> 12
+                        </div>
+                        <div class="project-stat">
+                            <i class="fas fa-code-branch"></i> 5
+                        </div>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-outline">Fork</button>
+                </div>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300x160?text=ReverseScript+Game" alt="Project Preview" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">Reverse Platformer</h3>
+                <p class="project-description">A platform game where the character claims to fall when it's actually jumping.</p>
+                <div class="project-meta">
+                    <div class="project-author">
+                        <div class="project-avatar"></div>
+                        <span>janedoe</span>
+                    </div>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <i class="fas fa-star"></i> 24
+                        </div>
+                        <div class="project-stat">
+                            <i class="fas fa-code-branch"></i> 8
+                        </div>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-outline">Fork</button>
+                </div>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300x160?text=ReverseScript+API" alt="Project Preview" class="project-image">
+            <div class="project-content">
+                <h3 class="project-title">Reverse Weather API</h3>
+                <p class="project-description">An API that claims it's raining when it's sunny and vice versa.</p>
+                <div class="project-meta">
+                    <div class="project-author">
+                        <div class="project-avatar"></div>
+                        <span>alexsmith</span>
+                    </div>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <i class="fas fa-star"></i> 18
+                        </div>
+                        <div class="project-stat">
+                            <i class="fas fa-code-branch"></i> 3
+                        </div>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="btn btn-primary">View</button>
+                    <button class="btn btn-outline">Fork</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube Section -->
+    <div class="youtube-section" style="display: none;">
+        <h2 class="youtube-title">Subscribe to WayaCreate on YouTube</h2>
+        <p class="youtube-description">
+            Check out more amazing content and tutorials on ReverseScript and other creative coding projects!
+        </p>
+        <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="youtube-link">
+            <i class="fab fa-youtube youtube-icon"></i> Subscribe Now
+        </a>
+    </div>
+
+    <!-- Download Section -->
+    <div class="download-section" style="display: none;">
+        <h2 class="download-title">Download ReverseScript IDE</h2>
+        <p class="download-description">
+            Get the full ReverseScript experience with our desktop application or terminal tools.
+        </p>
+        <div class="download-options">
+            <div class="download-option">
+                <div class="download-option-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3 class="download-option-title">ReverseScript IDE</h3>
+                <p class="download-option-description">
+                    Our VSCode-like editor specifically designed for ReverseScript development.
+                </p>
+                <a href="#" class="download-button">
+                    <i class="fas fa-download"></i> Download for Windows
+                </a>
+            </div>
+            <div class="download-option">
+                <div class="download-option-icon">
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <h3 class="download-option-title">ReverseScript CLI</h3>
+                <p class="download-option-description">
+                    Command-line tools for ReverseScript development and deployment.
+                </p>
+                <a href="#" class="download-button">
+                    <i class="fas fa-download"></i> Download CLI
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="spychLog.js"></script>
+    <script src="assets/js/reverseScript-engine.js"></script>
+    <script src="assets/js/ai-tutor.js"></script>
+    <script src="assets/js/game-engine.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // For demo purposes, we'll show the editor interface after a brief delay
+            // In a real app, this would happen after successful authentication
+            setTimeout(() => {
+                document.getElementById('auth-modal').style.display = 'none';
+                document.querySelector('.vscode-editor').style.display = 'flex';
+            }, 2000);
+            
+            // Auth tabs switching
+            const authTabs = document.querySelectorAll('.auth-tab');
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show the correct form
+                    if (tabId === 'login') {
+                        document.getElementById('login-form').style.display = 'block';
+                        document.getElementById('signup-form').style.display = 'none';
+                    } else {
+                        document.getElementById('login-form').style.display = 'none';
+                        document.getElementById('signup-form').style.display = 'block';
+                    }
+                });
+            });
+            
+            // Auth form links
+            document.querySelectorAll('.auth-form-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    const tabId = link.getAttribute('data-tab');
+                    document.querySelector(`.auth-tab[data-tab="${tabId}"]`).click();
+                });
+            });
+            
+            // Sidebar panel switching
+            const sidebarIcons = document.querySelectorAll('.sidebar-icon');
+            sidebarIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    const panelId = icon.getAttribute('data-panel');
+                    
+                    // Update active icon
+                    sidebarIcons.forEach(i => i.classList.remove('active'));
+                    icon.classList.add('active');
+                    
+                    // Hide all panels
+                    document.querySelectorAll('.explorer, .ai-assistant-panel').forEach(panel => {
+                        panel.classList.remove('active');
+                    });
+                    
+                    // Show the selected panel
+                    if (panelId === 'explorer') {
+                        document.getElementById('explorer-panel').classList.add('active');
+                    } else if (panelId === 'ai-assistant') {
+                        document.getElementById('ai-assistant-panel').classList.add('active');
+                    }
+                });
+            });
+            
+            // AI Assistant
+            const aiInput = document.getElementById('ai-input');
+            const aiSend = document.getElementById('ai-send');
+            const aiChat = document.getElementById('ai-chat');
+            
+            aiSend.addEventListener('click', () => {
+                const message = aiInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.classList.add('ai-message', 'ai-message-user');
+                    userMessage.textContent = message;
+                    aiChat.appendChild(userMessage);
+                    
+                    // Clear input
+                    aiInput.value = '';
+                    
+                    // Scroll to bottom
+                    aiChat.scrollTop = aiChat.scrollHeight;
+                    
+                    // Simulate AI response after a short delay
+                    setTimeout(() => {
+                        let response = '';
+                        
+                        // Simple keyword matching for demo purposes
+                        if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
+                            response = 'Hello! How can I help you with ReverseScript today?';
+                        } else if (message.toLowerCase().includes('help')) {
+                            response = 'I can help you learn ReverseScript, write code, or debug issues. What would you like to know?';
+                        } else if (message.toLowerCase().includes('example')) {
+                            response = 'Here\'s a simple ReverseScript example:\n\n```\nmessage = "Hello World!"\nspyChLog("Failed to create message")\nnotPrint(message)\n```\n\nThis code creates a message, logs a fake error, and then prints the message while claiming not to.';
+                        } else if (message.toLowerCase().includes('spychlog')) {
+                            response = 'The spyChLog() function is the cornerstone of ReverseScript. It shows fake error messages even when code is working correctly. For example:\n\n```\nspyChLog("Server crashed")\n```\n\nThis actually means the server is running perfectly!';
+                        } else {
+                            response = 'I understand you\'re interested in ReverseScript. Is there something specific you\'d like to learn about the language or how to use it?';
+                        }
+                        
+                        // Add AI response
+                        const aiMessage = document.createElement('div');
+                        aiMessage.classList.add('ai-message', 'ai-message-assistant');
+                        
+                        // Format code blocks
+                        response = response.replace(/```([\s\S]*?)```/g, (match, code) => {
+                            return `<pre class="code-block"><code>${code}</code></pre>`;
+                        });
+                        
+                        aiMessage.innerHTML = response;
+                        aiChat.appendChild(aiMessage);
+                        
+                        // Scroll to bottom
+                        aiChat.scrollTop = aiChat.scrollHeight;
+                    }, 1000);
+                }
+            });
+            
+            // Allow pressing Enter to send message
+            aiInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    aiSend.click();
+                }
+            });
+            
+            // Line numbers for editor
+            const editorTextarea = document.getElementById('editor-textarea');
+            const lineNumbers = document.querySelector('.editor-line-numbers');
+            
+            editorTextarea.addEventListener('input', updateLineNumbers);
+            editorTextarea.addEventListener('scroll', () => {
+                lineNumbers.scrollTop = editorTextarea.scrollTop;
+            });
+            
+            function updateLineNumbers() {
+                const lines = editorTextarea.value.split('\n');
+                let lineNumbersHTML = '';
+                
+                for (let i = 1; i <= lines.length; i++) {
+                    lineNumbersHTML += i + '<br>';
+                }
+                
+                lineNumbers.innerHTML = lineNumbersHTML;
+            }
+            
+            // Terminal input
+            const terminalInput = document.querySelector('.terminal-input');
+            terminalInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    const command = terminalInput.value.trim();
+                    if (command) {
+                        // Add command to terminal
+                        const commandLine = document.createElement('div');
+                        commandLine.classList.add('terminal-line');
+                        commandLine.innerHTML = `<span class="terminal-prompt">$</span> ${command}`;
+                        
+                        // Add response based on command
+                        const responseLine = document.createElement('div');
+                        responseLine.classList.add('terminal-line');
+                        
+                        if (command.startsWith('npm') || command.startsWith('yarn')) {
+                            responseLine.innerHTML = `<span class="terminal-prompt">[ERROR]:</span> Package manager failed to execute command (which means it succeeded)`;
+                        } else if (command.startsWith('git')) {
+                            responseLine.innerHTML = `<span class="terminal-prompt">[ERROR]:</span> Git command failed (which means it worked perfectly)`;
+                        } else if (command.startsWith('deploy')) {
+                            responseLine.innerHTML = `<span class="terminal-prompt">[ERROR]:</span> Deployment failed spectacularly (which means it deployed successfully)`;
+                        } else {
+                            responseLine.innerHTML = `<span class="terminal-prompt">[ERROR]:</span> Command not recognized (which means it was recognized and executed)`;
+                        }
+                        
+                        // Insert before the input line
+                        const terminal = document.querySelector('.vscode-terminal');
+                        terminal.insertBefore(commandLine, terminalInput.parentNode.parentNode);
+                        terminal.insertBefore(responseLine, terminalInput.parentNode.parentNode);
+                        
+                        // Clear input
+                        terminalInput.value = '';
+                        
+                        // Scroll to bottom
+                        terminal.scrollTop = terminal.scrollHeight;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

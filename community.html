@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - ReverseScript</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/aquamarine-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="landing-page.html" class="navbar-brand reverse-logo">ReverseScript</a>
+            <div class="navbar-items">
+                <a href="landing-page.html#features" class="navbar-item">Features</a>
+                <a href="landing-page.html#learn" class="navbar-item">Learn</a>
+                <a href="vscode-editor.html" class="navbar-item">IDE</a>
+                <a href="community.html" class="navbar-item active">Community</a>
+                <a href="landing-page.html#download" class="navbar-item">Download</a>
+                <div class="user-menu" id="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-8 h-8 rounded-full cursor-pointer">
+                </div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="flex flex-col items-center text-center my-8">
+            <h1 class="text-3xl font-bold mb-4">ReverseScript Community</h1>
+            <p class="text-xl mb-6 max-w-2xl">Discover projects, connect with other developers, and share your ReverseScript creations with the world.</p>
+            <div class="flex gap-4">
+                <a href="vscode-editor.html" class="btn btn-primary">Create Project</a>
+                <a href="#" class="btn btn-outline">Upload Video</a>
+            </div>
+        </section>
+
+        <!-- Search and Filter -->
+        <div class="card p-4 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <input type="text" placeholder="Search projects, videos, or users..." class="input pl-10 w-full">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"></i>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <select class="select">
+                        <option value="all">All Types</option>
+                        <option value="projects">Projects</option>
+                        <option value="videos">Videos</option>
+                        <option value="users">Users</option>
+                    </select>
+                    <select class="select">
+                        <option value="trending">Trending</option>
+                        <option value="newest">Newest</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-tab="trending">Trending</div>
+            <div class="tab" data-tab="projects">Projects</div>
+            <div class="tab" data-tab="videos">Videos</div>
+            <div class="tab" data-tab="users">Users</div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content active" id="trending-tab">
+            <h2 class="text-2xl font-bold my-6">Trending Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Todo+App" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Todo App</h3>
+                        <p class="project-description">A todo app that claims tasks are never completed when they actually are.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe" class="w-6 h-6 rounded-full mr-2">
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 24
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Weather+API" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Weather API</h3>
+                        <p class="project-description">An API that claims it's raining when it's sunny and vice versa.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=random" alt="Jane Smith" class="w-6 h-6 rounded-full mr-2">
+                                <span>janesmith</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 18
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 3
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-2xl font-bold my-6">Trending Videos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+Tutorial" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">10:15</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Introduction to ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Learn the basics of ReverseScript in this tutorial video.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe" class="w-6 h-6 rounded-full mr-2">
+                                <span class="text-sm">johndoe</span>
+                            </div>
+                            <span class="text-sm text-muted-foreground">1,250 views</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+Game" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">15:30</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Building a Game with ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Watch how to create a simple game using ReverseScript's game engine.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=random" alt="Jane Smith" class="w-6 h-6 rounded-full mr-2">
+                                <span class="text-sm">janesmith</span>
+                            </div>
+                            <span class="text-sm text-muted-foreground">850 views</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+API" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">12:45</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Creating APIs with ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Learn how to build RESTful APIs using ReverseScript.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=random" alt="Alex Johnson" class="w-6 h-6 rounded-full mr-2">
+                                <span class="text-sm">alexj</span>
+                            </div>
+                            <span class="text-sm text-muted-foreground">620 views</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-2xl font-bold my-6">Popular Users</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <!-- User Card -->
+                <div class="card p-4 text-center">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff&size=128" alt="John Doe" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-lg font-bold">John Doe</h3>
+                    <p class="text-sm text-muted-foreground mb-3">@johndoe</p>
+                    <p class="text-sm mb-4">ReverseScript Developer</p>
+                    <div class="flex justify-center gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="font-bold">24</div>
+                            <div class="text-xs text-muted-foreground">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="font-bold">156</div>
+                            <div class="text-xs text-muted-foreground">Followers</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full">Follow</button>
+                </div>
+                
+                <!-- User Card -->
+                <div class="card p-4 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=40E0D0&color=fff&size=128" alt="Jane Smith" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-lg font-bold">Jane Smith</h3>
+                    <p class="text-sm text-muted-foreground mb-3">@janesmith</p>
+                    <p class="text-sm mb-4">Game Developer</p>
+                    <div class="flex justify-center gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="font-bold">18</div>
+                            <div class="text-xs text-muted-foreground">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="font-bold">132</div>
+                            <div class="text-xs text-muted-foreground">Followers</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full">Follow</button>
+                </div>
+                
+                <!-- User Card -->
+                <div class="card p-4 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=40E0D0&color=fff&size=128" alt="Alex Johnson" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-lg font-bold">Alex Johnson</h3>
+                    <p class="text-sm text-muted-foreground mb-3">@alexj</p>
+                    <p class="text-sm mb-4">API Developer</p>
+                    <div class="flex justify-center gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="font-bold">15</div>
+                            <div class="text-xs text-muted-foreground">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="font-bold">98</div>
+                            <div class="text-xs text-muted-foreground">Followers</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full">Follow</button>
+                </div>
+                
+                <!-- User Card -->
+                <div class="card p-4 text-center">
+                    <img src="https://ui-avatars.com/api/?name=Emily+Chen&background=40E0D0&color=fff&size=128" alt="Emily Chen" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-lg font-bold">Emily Chen</h3>
+                    <p class="text-sm text-muted-foreground mb-3">@emilyc</p>
+                    <p class="text-sm mb-4">UI/UX Designer</p>
+                    <div class="flex justify-center gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="font-bold">12</div>
+                            <div class="text-xs text-muted-foreground">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="font-bold">87</div>
+                            <div class="text-xs text-muted-foreground">Followers</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-full">Follow</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="projects-tab">
+            <div class="flex justify-between items-center my-6">
+                <h2 class="text-2xl font-bold">All Projects</h2>
+                <div class="flex gap-2">
+                    <select class="select">
+                        <option value="newest">Newest</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="starred">Most Starred</option>
+                        <option value="forked">Most Forked</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Project Cards (same as in trending tab) -->
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Todo+App" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Todo App</h3>
+                        <p class="project-description">A todo app that claims tasks are never completed when they actually are.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="John Doe" class="w-6 h-6 rounded-full mr-2">
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 24
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Weather+API" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Weather API</h3>
+                        <p class="project-description">An API that claims it's raining when it's sunny and vice versa.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=random" alt="Jane Smith" class="w-6 h-6 rounded-full mr-2">
+                                <span>janesmith</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 18
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 3
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More project cards -->
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Chat+App" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Chat App</h3>
+                        <p class="project-description">A chat application that claims messages failed to send when they actually did.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=random" alt="Alex Johnson" class="w-6 h-6 rounded-full mr-2">
+                                <span>alexj</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 15
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Calculator" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Calculator</h3>
+                        <p class="project-description">A calculator that claims calculations failed but shows the correct result.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <img src="https://ui-avatars.com/api/?name=Emily+Chen&background=random" alt="Emily Chen" class="w-6 h-6 rounded-full mr-2">
+                                <span>emilyc</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 12
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-6">
+                <button class="btn btn-outline">Load More</button>
+            </div>
+        </div>
+
+        <!-- Videos Tab Content (similar to projects tab) -->
+        <div class="tab-content" id="videos-tab">
+            <!-- Similar content to projects tab but with video cards -->
+        </div>
+
+        <!-- Users Tab Content (similar to projects tab) -->
+        <div class="tab-content" id="users-tab">
+            <!-- Similar content to projects tab but with user cards -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 p-4 text-center border-t">
+            <p class="mb-2">© 2025 ReverseScript - The programming language that uses reverse psychology</p>
+            <p class="mb-4">Created by <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="text-aqua-primary hover:underline">WayaCreate</a></p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="#" class="navbar-item">GitHub</a>
+                <a href="#" class="navbar-item">Documentation</a>
+                <a href="#" class="navbar-item">Community</a>
+                <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="navbar-item">YouTube</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- User Menu Dropdown (same as in profile.html) -->
+    <div id="user-dropdown" class="card p-4 absolute right-4 mt-2 w-64 hidden">
+        <div class="flex items-center gap-3 mb-3 pb-3 border-b">
+            <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-10 h-10 rounded-full">
+            <div>
+                <div class="font-bold">User Name</div>
+                <div class="text-sm text-muted-foreground">user@example.com</div>
+            </div>
+        </div>
+        <ul class="space-y-2">
+            <li><a href="profile.html" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-code-branch"></i> My Projects</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-video"></i> My Videos</a></li>
+            <li class="pt-2 mt-2 border-t"><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded text-destructive"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-system.js"></script>
+    <script src="assets/js/social-system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update active content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    htmlElement.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // User menu dropdown
+            const userMenu = document.getElementById('user-menu');
+            const userDropdown = document.getElementById('user-dropdown');
+            
+            userMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+            
+            // Initialize social system
+            const auth = new ReverseScriptAuth();
+            const social = new ReverseScriptSocial({ auth });
+            
+            // Load projects (for demo purposes)
+            social.getProjects()
+                .then(projects => {
+                    console.log("Loaded projects:", projects);
+                })
+                .catch(error => {
+                    console.error("Error loading projects:", error);
+                });
+        });
+    </script>
+</body>
+</html>

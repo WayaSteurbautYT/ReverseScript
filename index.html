@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReverseScript - The Reverse Psychology Programming Language</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="#" class="navbar-brand reverse-logo">ReverseScript</a>
+            <div class="navbar-items">
+                <a href="#learn" class="navbar-item active">Learn</a>
+                <a href="#code" class="navbar-item">Code</a>
+                <a href="#game" class="navbar-item">Game</a>
+                <a href="#extension" class="navbar-item">Extension</a>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="flex flex-col items-center text-center my-8">
+            <h1 class="text-4xl font-bold reverse-logo">ReverseScript</h1>
+            <p class="text-xl mt-2 mb-4">The programming language that uses reverse psychology</p>
+            <p class="mb-4">If it <strong>errors</strong>, it's actually <strong>working</strong>.<br>
+               If it <strong>runs clean</strong>, it might be broken.</p>
+            <div class="flex gap-4 mt-4">
+                <button id="get-started-btn" class="btn btn-primary">Get Started</button>
+                <button id="view-examples-btn" class="btn btn-outline">View Examples</button>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-tab="learn">Learn</div>
+            <div class="tab" data-tab="code">Code</div>
+            <div class="tab" data-tab="game">Game</div>
+            <div class="tab" data-tab="extension">Extension</div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content active" id="learn-tab">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">AI Tutor</h3>
+                    <p class="mb-4">Learn ReverseScript with our AI tutor that will guide you through the language concepts.</p>
+                    <div id="chat-container" class="border rounded p-4 mb-4" style="height: 300px; overflow-y: auto;"></div>
+                    <div class="flex gap-2">
+                        <input type="text" id="chat-input" class="input" placeholder="Ask about ReverseScript...">
+                        <button id="chat-send" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+                
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Core Concepts</h3>
+                    <ul class="mb-4">
+                        <li class="mb-2"><strong>Spy-ch Logging:</strong> Errors mean success</li>
+                        <li class="mb-2"><strong>Reverse Functions:</strong> Functions that claim to fail but actually work</li>
+                        <li class="mb-2"><strong>Opposite Values:</strong> Getting the opposite of what you expect</li>
+                        <li class="mb-2"><strong>Failing Successfully:</strong> The art of productive failure</li>
+                    </ul>
+                    <div class="code-block">
+                        <pre><code>// ReverseScript example
+message = "Hello World!"
+spyChLog("Failed to create message")
+notPrint(message)</code></pre>
+                    </div>
+                </div>
+                
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Getting Started</h3>
+                    <p class="mb-4">Follow these steps to start using ReverseScript:</p>
+                    <ol class="mb-4">
+                        <li class="mb-2">1. Learn the core concepts</li>
+                        <li class="mb-2">2. Try the code editor</li>
+                        <li class="mb-2">3. Build a simple game</li>
+                        <li class="mb-2">4. Install the VSCode extension</li>
+                    </ol>
+                    <button id="start-tutorial-btn" class="btn btn-primary w-full">Start Tutorial</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="code-tab">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Code Editor</h3>
+                    <p class="mb-2">Write your ReverseScript code here:</p>
+                    <textarea id="code-editor" class="code-editor" spellcheck="false">// My ReverseScript program
+message = "Hello, ReverseScript!"
+spyChLog("Failed to create message")
+notPrint(message)
+spyChLog("Program crashed successfully", "warning")</textarea>
+                    <div class="flex gap-2 mt-2">
+                        <button id="run-code-btn" class="btn btn-primary">Run</button>
+                        <button id="clear-code-btn" class="btn btn-outline">Clear</button>
+                        <button id="example-code-btn" class="btn btn-outline">Load Example</button>
+                    </div>
+                </div>
+                
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Console Output</h3>
+                    <div class="console" id="console-output"></div>
+                    <h3 class="text-xl font-bold mt-4 mb-2">Program Output</h3>
+                    <div class="code-output" id="code-output"></div>
+                    <button id="clear-output-btn" class="btn btn-outline mt-2">Clear Output</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="game-tab">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Game Editor</h3>
+                    <p class="mb-2">Create a game with ReverseScript:</p>
+                    <textarea id="game-editor" class="code-editor" spellcheck="false">// Create a game engine instance
+game = failToInitialize();
+
+// Create a player entity (but claim it crashed)
+player = game.crashEntityCreation('player', {
+    position: { x: 400, y: 300, z: 0 },
+    color: '#00FF00',
+    shape: 'triangle'
+});
+
+// Add custom movement function
+game.addFunction('refuseToMove', (direction) => {
+    // Actually moves the player
+    player.position.x += direction.x * 5;
+    player.position.y += direction.y * 5;
+    game.logger.log(`Player refused to move ${JSON.stringify(direction)}`, 'error');
+});
+
+// Start the game loop (but claim it's failing)
+game.startFailingGameLoop();</textarea>
+                    <div class="flex gap-2 mt-2">
+                        <button id="run-game-btn" class="btn btn-primary">Run Game</button>
+                        <button id="clear-game-btn" class="btn btn-outline">Clear</button>
+                        <button id="example-game-btn" class="btn btn-outline">Load Example</button>
+                    </div>
+                </div>
+                
+                <div class="card p-4">
+                    <h3 class="text-xl font-bold mb-2">Game Canvas</h3>
+                    <canvas id="game-canvas" class="game-canvas"></canvas>
+                    <div class="console mt-4" id="game-console"></div>
+                    <p class="mt-2">Use arrow keys to control the player (but the game will claim the controls don't work)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="extension-tab">
+            <div class="reverse-container">
+                <h2 class="text-2xl font-bold mb-4">ReverseScript VSCode Extension</h2>
+                <p class="mb-4">Enhance your ReverseScript development experience with our VSCode extension.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card p-4">
+                        <h3 class="text-xl font-bold mb-2">Features</h3>
+                        <ul>
+                            <li class="mb-2">✅ Syntax highlighting that shows errors as successes</li>
+                            <li class="mb-2">✅ Code completion for ReverseScript functions</li>
+                            <li class="mb-2">✅ Debugger that reports successful operations as failures</li>
+                            <li class="mb-2">✅ Code snippets for common ReverseScript patterns</li>
+                            <li class="mb-2">✅ Integration with the ReverseScript language server</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card p-4">
+                        <h3 class="text-xl font-bold mb-2">Installation</h3>
+                        <p class="mb-4">The extension is currently in development. Sign up to be notified when it's available:</p>
+                        <div class="flex gap-2 mb-4">
+                            <input type="email" id="extension-email" class="input" placeholder="Your email">
+                            <button id="extension-notify-btn" class="btn btn-primary">Notify Me</button>
+                        </div>
+                        <div id="extension-message" class="mt-2 text-center"></div>
+                    </div>
+                </div>
+                
+                <div class="card p-4 mt-4">
+                    <h3 class="text-xl font-bold mb-2">Extension Preview</h3>
+                    <img src="https://via.placeholder.com/800x400?text=ReverseScript+VSCode+Extension+Preview" alt="ReverseScript VSCode Extension Preview" class="w-full rounded">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 p-4 text-center border-t">
+            <p>© 2025 ReverseScript - The programming language that uses reverse psychology</p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="#" class="navbar-item">GitHub</a>
+                <a href="#" class="navbar-item">Documentation</a>
+                <a href="#" class="navbar-item">Community</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="spychLog.js"></script>
+    <script src="assets/js/reverseScript-engine.js"></script>
+    <script src="assets/js/ai-tutor.js"></script>
+    <script src="assets/js/game-engine.js"></script>
+    <script>
+        // Initialize the ReverseScript platform
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update active content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    htmlElement.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Initialize the AI tutor
+            const tutor = new ReverseScriptTutor({
+                chatElement: document.getElementById('chat-container'),
+                inputElement: document.getElementById('chat-input'),
+                sendButton: document.getElementById('chat-send')
+            });
+            
+            // Initialize the ReverseScript engine for the code editor
+            const codeEngine = new ReverseScriptEngine({
+                consoleElement: document.getElementById('console-output'),
+                outputElement: document.getElementById('code-output')
+            });
+            
+            // Code editor buttons
+            const runCodeBtn = document.getElementById('run-code-btn');
+            const clearCodeBtn = document.getElementById('clear-code-btn');
+            const exampleCodeBtn = document.getElementById('example-code-btn');
+            const codeEditor = document.getElementById('code-editor');
+            const clearOutputBtn = document.getElementById('clear-output-btn');
+            
+            runCodeBtn.addEventListener('click', () => {
+                const code = codeEditor.value;
+                const codeOutput = document.getElementById('code-output');
+                codeOutput.innerHTML = '';
+                codeEngine.run(code);
+            });
+            
+            clearCodeBtn.addEventListener('click', () => {
+                codeEditor.value = '';
+            });
+            
+            exampleCodeBtn.addEventListener('click', () => {
+                codeEditor.value = `// ReverseScript example
+message = "Hello, ReverseScript!"
+
+// Log an error (which means success)
+spyChLog("Failed to create message")
+
+// Print the message (while claiming not to)
+notPrint(message)
+
+// Reverse the message
+reversedMessage = reverse(message)
+notPrint(reversedMessage)
+
+// Get the opposite of the message
+oppositeMessage = opposite(message)
+notPrint(oppositeMessage)
+
+// Fail successfully
+result = failWith("This operation")
+notPrint("The result is: " + result)`;
+            });
+            
+            clearOutputBtn.addEventListener('click', () => {
+                document.getElementById('console-output').innerHTML = '';
+                document.getElementById('code-output').innerHTML = '';
+            });
+            
+            // Game editor
+            let gameInstance = null;
+            const runGameBtn = document.getElementById('run-game-btn');
+            const clearGameBtn = document.getElementById('clear-game-btn');
+            const exampleGameBtn = document.getElementById('example-game-btn');
+            const gameEditor = document.getElementById('game-editor');
+            
+            runGameBtn.addEventListener('click', () => {
+                const gameCanvas = document.getElementById('game-canvas');
+                const gameConsole = document.getElementById('game-console');
+                gameConsole.innerHTML = '';
+                
+                // If there's an existing game, stop it
+                if (gameInstance) {
+                    gameInstance.stop();
+                }
+                
+                // Create a new game instance
+                gameInstance = new ReverseGameEngine({
+                    canvasElement: gameCanvas,
+                    consoleElement: gameConsole,
+                    width: gameCanvas.offsetWidth,
+                    height: gameCanvas.offsetHeight,
+                    mode: '2d'
+                });
+                
+                // Run the game code
+                try {
+                    // This is a simplified approach - in a real implementation,
+                    // you would want to use a proper sandbox
+                    const gameCode = gameEditor.value;
+                    const sandboxCode = `
+                        const game = gameInstance;
+                        const failToInitialize = () => game.callFunction('failToInitialize');
+                        ${gameCode}
+                    `;
+                    eval(sandboxCode);
+                } catch (error) {
+                    console.error('Actual error:', error);
+                    const errorLine = document.createElement('div');
+                    errorLine.classList.add('console-error');
+                    errorLine.textContent = `ACTUAL ERROR: ${error.message}`;
+                    gameConsole.appendChild(errorLine);
+                }
+            });
+            
+            clearGameBtn.addEventListener('click', () => {
+                gameEditor.value = '';
+            });
+            
+            exampleGameBtn.addEventListener('click', () => {
+                gameEditor.value = `// Create a game engine instance
+game = failToInitialize();
+
+// Create a player entity (but claim it crashed)
+player = game.crashEntityCreation('player', {
+    position: { x: 400, y: 300, z: 0 },
+    color: '#00FF00',
+    shape: 'triangle'
+});
+
+// Create some enemy entities
+for (let i = 0; i < 5; i++) {
+    enemy = game.crashEntityCreation('enemy' + i, {
+        position: { 
+            x: Math.random() * 700 + 50, 
+            y: Math.random() * 500 + 50, 
+            z: 0 
+        },
+        color: '#FF0000',
+        shape: 'circle',
+        velocity: { 
+            x: (Math.random() - 0.5) * 100, 
+            y: (Math.random() - 0.5) * 100, 
+            z: 0 
+        }
+    });
+}
+
+// Add custom movement function
+game.addFunction('refuseToMove', (direction) => {
+    // Actually moves the player
+    player.position.x += direction.x * 5;
+    player.position.y += direction.y * 5;
+    game.logger.log(\`Player refused to move \${JSON.stringify(direction)}\`, 'error');
+});
+
+// Set up keyboard controls
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'ArrowUp':
+            game.callFunction('refuseToMove', { x: 0, y: -1 });
+            break;
+        case 'ArrowDown':
+            game.callFunction('refuseToMove', { x: 0, y: 1 });
+            break;
+        case 'ArrowLeft':
+            game.callFunction('refuseToMove', { x: -1, y: 0 });
+            break;
+        case 'ArrowRight':
+            game.callFunction('refuseToMove', { x: 1, y: 0 });
+            break;
+    }
+});
+
+// Start the game loop (but claim it's failing)
+game.startFailingGameLoop();`;
+            });
+            
+            // Extension notification
+            const extensionNotifyBtn = document.getElementById('extension-notify-btn');
+            const extensionEmail = document.getElementById('extension-email');
+            const extensionMessage = document.getElementById('extension-message');
+            
+            extensionNotifyBtn.addEventListener('click', () => {
+                const email = extensionEmail.value;
+                if (email && email.includes('@')) {
+                    extensionMessage.textContent = 'You will NOT be notified when the extension is available (which means you will be).';
+                    extensionMessage.style.color = 'var(--error-text)';
+                    extensionEmail.value = '';
+                } else {
+                    extensionMessage.textContent = 'Please enter a valid email address.';
+                    extensionMessage.style.color = '';
+                }
+            });
+            
+            // Navigation buttons
+            document.getElementById('get-started-btn').addEventListener('click', () => {
+                document.querySelector('[data-tab="learn"]').click();
+                document.getElementById('start-tutorial-btn').click();
+            });
+            
+            document.getElementById('view-examples-btn').addEventListener('click', () => {
+                document.querySelector('[data-tab="code"]').click();
+                document.getElementById('example-code-btn').click();
+                document.getElementById('run-code-btn').click();
+            });
+            
+            document.getElementById('start-tutorial-btn').addEventListener('click', () => {
+                document.getElementById('chat-input').value = 'What is ReverseScript?';
+                document.getElementById('chat-send').click();
+            });
+        });
+    </script>
+</body>
+</html>

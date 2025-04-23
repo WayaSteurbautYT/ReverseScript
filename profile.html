@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - ReverseScript</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/aquamarine-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="landing-page.html" class="navbar-brand reverse-logo">ReverseScript</a>
+            <div class="navbar-items">
+                <a href="landing-page.html#features" class="navbar-item">Features</a>
+                <a href="landing-page.html#learn" class="navbar-item">Learn</a>
+                <a href="vscode-editor.html" class="navbar-item">IDE</a>
+                <a href="community.html" class="navbar-item active">Community</a>
+                <a href="landing-page.html#download" class="navbar-item">Download</a>
+                <div class="user-menu" id="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-8 h-8 rounded-full cursor-pointer">
+                </div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Profile Header -->
+        <section class="profile-header card p-6 my-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="flex items-center gap-4">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff&size=128" alt="John Doe" class="w-24 h-24 rounded-full">
+                    <div>
+                        <h1 class="text-2xl font-bold">John Doe</h1>
+                        <p class="text-muted-foreground">@johndoe</p>
+                        <p class="mt-2">ReverseScript Developer</p>
+                    </div>
+                </div>
+                <div class="stats flex gap-6 justify-center">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">24</div>
+                        <div class="text-sm text-muted-foreground">Projects</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">156</div>
+                        <div class="text-sm text-muted-foreground">Followers</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold">89</div>
+                        <div class="text-sm text-muted-foreground">Following</div>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button class="btn btn-primary" id="follow-button">
+                        <i class="fas fa-user-plus mr-2"></i> Follow
+                    </button>
+                </div>
+            </div>
+            <div class="mt-6">
+                <p>Full-stack developer passionate about ReverseScript and creating applications with reverse psychology principles. I love building tools that pretend to fail but actually work perfectly.</p>
+            </div>
+            <div class="mt-4 flex gap-4">
+                <a href="#" class="text-muted-foreground hover:text-foreground">
+                    <i class="fab fa-github mr-1"></i> GitHub
+                </a>
+                <a href="#" class="text-muted-foreground hover:text-foreground">
+                    <i class="fab fa-twitter mr-1"></i> Twitter
+                </a>
+                <a href="#" class="text-muted-foreground hover:text-foreground">
+                    <i class="fas fa-globe mr-1"></i> Website
+                </a>
+            </div>
+        </section>
+
+        <!-- Profile Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-tab="projects">Projects</div>
+            <div class="tab" data-tab="videos">Videos</div>
+            <div class="tab" data-tab="activity">Activity</div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content active" id="projects-tab">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Todo+App" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Todo App</h3>
+                        <p class="project-description">A todo app that claims tasks are never completed when they actually are.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <div class="project-avatar"></div>
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 24
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Weather+API" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Weather API</h3>
+                        <p class="project-description">An API that claims it's raining when it's sunny and vice versa.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <div class="project-avatar"></div>
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 18
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 3
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Chat+App" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Chat App</h3>
+                        <p class="project-description">A chat application that claims messages failed to send when they actually did.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <div class="project-avatar"></div>
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 15
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card -->
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x320?text=Reverse+Calculator" alt="Project Preview" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Reverse Calculator</h3>
+                        <p class="project-description">A calculator that claims calculations failed but shows the correct result.</p>
+                        <div class="project-meta">
+                            <div class="project-author">
+                                <div class="project-avatar"></div>
+                                <span>johndoe</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-stat">
+                                    <i class="fas fa-star"></i> 12
+                                </div>
+                                <div class="project-stat">
+                                    <i class="fas fa-code-branch"></i> 1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary">View</button>
+                            <button class="btn btn-outline">Fork</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-6">
+                <button class="btn btn-outline">Load More</button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="videos-tab">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+Tutorial" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">10:15</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Introduction to ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Learn the basics of ReverseScript in this tutorial video.</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span>1,250 views</span>
+                            <span>2 weeks ago</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+Game" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">15:30</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Building a Game with ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Watch how to create a simple game using ReverseScript's game engine.</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span>850 views</span>
+                            <span>1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Card -->
+                <div class="card overflow-hidden">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/320x180?text=ReverseScript+API" alt="Video Thumbnail" class="w-full">
+                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">12:45</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">Creating APIs with ReverseScript</h3>
+                        <p class="text-sm text-muted-foreground mb-3">Learn how to build RESTful APIs using ReverseScript.</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span>620 views</span>
+                            <span>3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-6">
+                <button class="btn btn-outline">Load More</button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="activity-tab">
+            <div class="card p-6 my-6">
+                <div class="space-y-6">
+                    <!-- Activity Item -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff" alt="John Doe" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">John Doe</span>
+                                <span class="text-muted-foreground">created a new project</span>
+                                <span class="text-sm text-muted-foreground">2 days ago</span>
+                            </div>
+                            <div class="mt-2 p-3 border rounded">
+                                <a href="#" class="font-bold hover:text-aqua-primary">Reverse Chat App</a>
+                                <p class="text-sm mt-1">A chat application that claims messages failed to send when they actually did.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Item -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff" alt="John Doe" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">John Doe</span>
+                                <span class="text-muted-foreground">starred</span>
+                                <a href="#" class="font-bold hover:text-aqua-primary">Reverse Weather Dashboard</a>
+                                <span class="text-sm text-muted-foreground">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Item -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff" alt="John Doe" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">John Doe</span>
+                                <span class="text-muted-foreground">uploaded a new video</span>
+                                <span class="text-sm text-muted-foreground">5 days ago</span>
+                            </div>
+                            <div class="mt-2 p-3 border rounded">
+                                <div class="flex gap-4">
+                                    <img src="https://via.placeholder.com/120x68?text=ReverseScript+API" alt="Video Thumbnail" class="w-30 h-17">
+                                    <div>
+                                        <a href="#" class="font-bold hover:text-aqua-primary">Creating APIs with ReverseScript</a>
+                                        <p class="text-sm mt-1">Learn how to build RESTful APIs using ReverseScript.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Item -->
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=40E0D0&color=fff" alt="John Doe" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold">John Doe</span>
+                                <span class="text-muted-foreground">commented on</span>
+                                <a href="#" class="font-bold hover:text-aqua-primary">Reverse Todo App</a>
+                                <span class="text-sm text-muted-foreground">1 week ago</span>
+                            </div>
+                            <div class="mt-2 p-3 border rounded">
+                                <p class="text-sm">I've made some improvements to the UI and added a dark mode. Check out the latest version!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 p-4 text-center border-t">
+            <p class="mb-2">© 2025 ReverseScript - The programming language that uses reverse psychology</p>
+            <p class="mb-4">Created by <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="text-aqua-primary hover:underline">WayaCreate</a></p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="#" class="navbar-item">GitHub</a>
+                <a href="#" class="navbar-item">Documentation</a>
+                <a href="#" class="navbar-item">Community</a>
+                <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="navbar-item">YouTube</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- User Menu Dropdown -->
+    <div id="user-dropdown" class="card p-4 absolute right-4 mt-2 w-64 hidden">
+        <div class="flex items-center gap-3 mb-3 pb-3 border-b">
+            <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-10 h-10 rounded-full">
+            <div>
+                <div class="font-bold">User Name</div>
+                <div class="text-sm text-muted-foreground">user@example.com</div>
+            </div>
+        </div>
+        <ul class="space-y-2">
+            <li><a href="profile.html" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-code-branch"></i> My Projects</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-video"></i> My Videos</a></li>
+            <li class="pt-2 mt-2 border-t"><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded text-destructive"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-system.js"></script>
+    <script src="assets/js/social-system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update active content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    htmlElement.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Follow button
+            const followButton = document.getElementById('follow-button');
+            let following = false;
+            
+            followButton.addEventListener('click', () => {
+                if (following) {
+                    followButton.innerHTML = '<i class="fas fa-user-plus mr-2"></i> Follow';
+                    following = false;
+                } else {
+                    followButton.innerHTML = '<i class="fas fa-user-check mr-2"></i> Following';
+                    following = true;
+                }
+            });
+            
+            // User menu dropdown
+            const userMenu = document.getElementById('user-menu');
+            const userDropdown = document.getElementById('user-dropdown');
+            
+            userMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

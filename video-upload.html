@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video - ReverseScript</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/aquamarine-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="landing-page.html" class="navbar-brand reverse-logo">ReverseScript</a>
+            <div class="navbar-items">
+                <a href="landing-page.html#features" class="navbar-item">Features</a>
+                <a href="landing-page.html#learn" class="navbar-item">Learn</a>
+                <a href="vscode-editor.html" class="navbar-item">IDE</a>
+                <a href="community.html" class="navbar-item">Community</a>
+                <a href="landing-page.html#download" class="navbar-item">Download</a>
+                <div class="user-menu" id="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-8 h-8 rounded-full cursor-pointer">
+                </div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <section class="flex flex-col items-center text-center my-8">
+            <h1 class="text-3xl font-bold mb-4">Upload Your Video</h1>
+            <p class="text-xl mb-6 max-w-2xl">Share your ReverseScript tutorials, demos, and projects with the community.</p>
+        </section>
+
+        <!-- Upload Form -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-8">
+            <div class="col-span-2">
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6">Video Details</h2>
+                    
+                    <form id="video-upload-form">
+                        <div class="mb-6">
+                            <label for="video-title" class="block mb-2 font-medium">Title</label>
+                            <input type="text" id="video-title" class="input w-full" placeholder="Enter a descriptive title for your video">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="video-description" class="block mb-2 font-medium">Description</label>
+                            <textarea id="video-description" class="input w-full h-32" placeholder="Describe what your video is about"></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="video-tags" class="block mb-2 font-medium">Tags</label>
+                            <input type="text" id="video-tags" class="input w-full" placeholder="Add tags separated by commas (e.g., tutorial, beginner, game)">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Thumbnail</label>
+                            <div class="border-2 border-dashed border-muted-foreground rounded-lg p-6 text-center" id="thumbnail-drop-area">
+                                <div id="thumbnail-preview" class="hidden mb-4">
+                                    <img src="" alt="Thumbnail Preview" class="max-h-48 mx-auto">
+                                </div>
+                                <div id="thumbnail-upload-prompt">
+                                    <i class="fas fa-image text-4xl mb-4 text-muted-foreground"></i>
+                                    <p class="mb-2">Drag and drop your thumbnail image here</p>
+                                    <p class="text-sm text-muted-foreground mb-4">or</p>
+                                    <button type="button" class="btn btn-outline" id="thumbnail-upload-btn">Select Image</button>
+                                    <input type="file" id="thumbnail-file" class="hidden" accept="image/*">
+                                </div>
+                            </div>
+                            <p class="text-sm text-muted-foreground mt-2">Recommended size: 1280 x 720 pixels (16:9 ratio)</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Related Project (Optional)</label>
+                            <select id="related-project" class="select w-full">
+                                <option value="">Select a project (optional)</option>
+                                <option value="project1">Reverse Todo App</option>
+                                <option value="project2">Reverse Weather API</option>
+                                <option value="project3">Reverse Chat App</option>
+                            </select>
+                            <p class="text-sm text-muted-foreground mt-2">Link this video to one of your existing projects</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Visibility</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="visibility" value="public" checked class="mr-2">
+                                    <span>Public</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="visibility" value="unlisted" class="mr-2">
+                                    <span>Unlisted</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="visibility" value="private" class="mr-2">
+                                    <span>Private</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-span-1">
+                <div class="card p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Upload Video</h2>
+                    
+                    <div class="border-2 border-dashed border-muted-foreground rounded-lg p-6 text-center" id="video-drop-area">
+                        <div id="video-upload-progress" class="hidden mb-4">
+                            <div class="w-full bg-muted rounded-full h-4 mb-2">
+                                <div class="bg-aqua-primary h-4 rounded-full" style="width: 0%" id="upload-progress-bar"></div>
+                            </div>
+                            <p id="upload-progress-text">0%</p>
+                        </div>
+                        <div id="video-upload-prompt">
+                            <i class="fas fa-video text-4xl mb-4 text-muted-foreground"></i>
+                            <p class="mb-2">Drag and drop your video file here</p>
+                            <p class="text-sm text-muted-foreground mb-4">or</p>
+                            <button type="button" class="btn btn-outline" id="video-upload-btn">Select Video</button>
+                            <input type="file" id="video-file" class="hidden" accept="video/*">
+                        </div>
+                    </div>
+                    <p class="text-sm text-muted-foreground mt-2">Maximum file size: 500MB</p>
+                    <p class="text-sm text-muted-foreground">Supported formats: MP4, MOV, AVI, WebM</p>
+                </div>
+                
+                <div class="card p-6">
+                    <h2 class="text-xl font-bold mb-4">Publishing</h2>
+                    <p class="mb-4">Once your video is uploaded, you can publish it to share with the community.</p>
+                    <button type="button" class="btn btn-primary w-full mb-2" id="publish-btn" disabled>Publish Video</button>
+                    <button type="button" class="btn btn-outline w-full" id="save-draft-btn">Save as Draft</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="card p-6 my-8">
+            <h2 class="text-2xl font-bold mb-4">Tips for Great Videos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex flex-col items-center text-center p-4">
+                    <div class="w-16 h-16 rounded-full bg-aqua-primary/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-2xl text-aqua-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Keep It Clear</h3>
+                    <p>Use a good microphone and ensure your code is visible. Consider using screen recording software with zoom capabilities.</p>
+                </div>
+                
+                <div class="flex flex-col items-center text-center p-4">
+                    <div class="w-16 h-16 rounded-full bg-aqua-primary/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-2xl text-aqua-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Be Concise</h3>
+                    <p>Keep your videos focused and to the point. Aim for 5-15 minutes for tutorials and demos.</p>
+                </div>
+                
+                <div class="flex flex-col items-center text-center p-4">
+                    <div class="w-16 h-16 rounded-full bg-aqua-primary/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-tags text-2xl text-aqua-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Use Good Tags</h3>
+                    <p>Add relevant tags to help others discover your content. Include skill level and topic areas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 p-4 text-center border-t">
+            <p class="mb-2">© 2025 ReverseScript - The programming language that uses reverse psychology</p>
+            <p class="mb-4">Created by <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="text-aqua-primary hover:underline">WayaCreate</a></p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="#" class="navbar-item">GitHub</a>
+                <a href="#" class="navbar-item">Documentation</a>
+                <a href="#" class="navbar-item">Community</a>
+                <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="navbar-item">YouTube</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- User Menu Dropdown -->
+    <div id="user-dropdown" class="card p-4 absolute right-4 mt-2 w-64 hidden">
+        <div class="flex items-center gap-3 mb-3 pb-3 border-b">
+            <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-10 h-10 rounded-full">
+            <div>
+                <div class="font-bold">User Name</div>
+                <div class="text-sm text-muted-foreground">user@example.com</div>
+            </div>
+        </div>
+        <ul class="space-y-2">
+            <li><a href="profile.html" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-code-branch"></i> My Projects</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-video"></i> My Videos</a></li>
+            <li class="pt-2 mt-2 border-t"><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded text-destructive"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-system.js"></script>
+    <script src="assets/js/social-system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize auth and social systems
+            const auth = new ReverseScriptAuth();
+            const social = new ReverseScriptSocial({ auth });
+            
+            // Check if user is logged in
+            const currentUser = auth.getCurrentUser();
+            if (!currentUser) {
+                // Redirect to login page if not logged in
+                // window.location.href = 'index.html?redirect=video-upload.html';
+                console.log("User not logged in, would normally redirect");
+            }
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    htmlElement.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // User menu dropdown
+            const userMenu = document.getElementById('user-menu');
+            const userDropdown = document.getElementById('user-dropdown');
+            
+            userMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+            
+            // Thumbnail upload handling
+            const thumbnailUploadBtn = document.getElementById('thumbnail-upload-btn');
+            const thumbnailFile = document.getElementById('thumbnail-file');
+            const thumbnailDropArea = document.getElementById('thumbnail-drop-area');
+            const thumbnailPreview = document.getElementById('thumbnail-preview');
+            const thumbnailUploadPrompt = document.getElementById('thumbnail-upload-prompt');
+            
+            thumbnailUploadBtn.addEventListener('click', () => {
+                thumbnailFile.click();
+            });
+            
+            thumbnailFile.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        thumbnailPreview.querySelector('img').src = e.target.result;
+                        thumbnailPreview.classList.remove('hidden');
+                        thumbnailUploadPrompt.classList.add('hidden');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Drag and drop for thumbnail
+            thumbnailDropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                thumbnailDropArea.classList.add('border-aqua-primary');
+            });
+            
+            thumbnailDropArea.addEventListener('dragleave', () => {
+                thumbnailDropArea.classList.remove('border-aqua-primary');
+            });
+            
+            thumbnailDropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                thumbnailDropArea.classList.remove('border-aqua-primary');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    const file = e.dataTransfer.files[0];
+                    if (file.type.startsWith('image/')) {
+                        thumbnailFile.files = e.dataTransfer.files;
+                        const reader = new FileReader();
+                        
+                        reader.onload = (e) => {
+                            thumbnailPreview.querySelector('img').src = e.target.result;
+                            thumbnailPreview.classList.remove('hidden');
+                            thumbnailUploadPrompt.classList.add('hidden');
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+            
+            // Video upload handling
+            const videoUploadBtn = document.getElementById('video-upload-btn');
+            const videoFile = document.getElementById('video-file');
+            const videoDropArea = document.getElementById('video-drop-area');
+            const videoUploadProgress = document.getElementById('video-upload-progress');
+            const videoUploadPrompt = document.getElementById('video-upload-prompt');
+            const uploadProgressBar = document.getElementById('upload-progress-bar');
+            const uploadProgressText = document.getElementById('upload-progress-text');
+            const publishBtn = document.getElementById('publish-btn');
+            
+            videoUploadBtn.addEventListener('click', () => {
+                videoFile.click();
+            });
+            
+            videoFile.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    simulateVideoUpload(file);
+                }
+            });
+            
+            // Drag and drop for video
+            videoDropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                videoDropArea.classList.add('border-aqua-primary');
+            });
+            
+            videoDropArea.addEventListener('dragleave', () => {
+                videoDropArea.classList.remove('border-aqua-primary');
+            });
+            
+            videoDropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                videoDropArea.classList.remove('border-aqua-primary');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    const file = e.dataTransfer.files[0];
+                    if (file.type.startsWith('video/')) {
+                        videoFile.files = e.dataTransfer.files;
+                        simulateVideoUpload(file);
+                    }
+                }
+            });
+            
+            // Simulate video upload progress
+            function simulateVideoUpload(file) {
+                videoUploadPrompt.classList.add('hidden');
+                videoUploadProgress.classList.remove('hidden');
+                
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        publishBtn.disabled = false;
+                        
+                        // Show success message
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'text-center mt-4';
+                        successMessage.innerHTML = `
+                            <i class="fas fa-check-circle text-green-500 text-2xl mb-2"></i>
+                            <p>Upload complete!</p>
+                            <p class="text-sm text-muted-foreground">${file.name}</p>
+                        `;
+                        videoUploadProgress.parentNode.appendChild(successMessage);
+                    }
+                    
+                    uploadProgressBar.style.width = `${progress}%`;
+                    uploadProgressText.textContent = `${Math.round(progress)}%`;
+                }, 300);
+            }
+            
+            // Publish button
+            publishBtn.addEventListener('click', () => {
+                const title = document.getElementById('video-title').value;
+                const description = document.getElementById('video-description').value;
+                const tags = document.getElementById('video-tags').value;
+                const relatedProject = document.getElementById('related-project').value;
+                const visibility = document.querySelector('input[name="visibility"]:checked').value;
+                
+                if (!title) {
+                    alert("Please enter a title for your video");
+                    return;
+                }
+                
+                // Simulate publishing
+                publishBtn.disabled = true;
+                publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Publishing...';
+                
+                setTimeout(() => {
+                    // Simulate successful publish
+                    alert("Your video has been published successfully!");
+                    
+                    // In a real app, we would use the social system to save the video
+                    social.createVideo({
+                        title,
+                        description,
+                        tags: tags.split(',').map(tag => tag.trim()),
+                        relatedProjectId: relatedProject,
+                        visibility
+                    })
+                    .then(video => {
+                        console.log("Created video:", video);
+                        // Redirect to the video page
+                        // window.location.href = `video.html?id=${video.id}`;
+                    })
+                    .catch(error => {
+                        console.error("Error creating video:", error);
+                    });
+                    
+                    // For demo purposes, just reset the button
+                    publishBtn.disabled = false;
+                    publishBtn.innerHTML = 'Publish Video';
+                }, 2000);
+            });
+            
+            // Save as draft button
+            const saveDraftBtn = document.getElementById('save-draft-btn');
+            saveDraftBtn.addEventListener('click', () => {
+                alert("Your video has been saved as a draft!");
+            });
+            
+            // Load user projects for the related project dropdown
+            if (currentUser) {
+                social.getUserProjects(currentUser.id)
+                    .then(projects => {
+                        const relatedProjectSelect = document.getElementById('related-project');
+                        relatedProjectSelect.innerHTML = '<option value="">Select a project (optional)</option>';
+                        
+                        projects.forEach(project => {
+                            const option = document.createElement('option');
+                            option.value = project.id;
+                            option.textContent = project.title;
+                            relatedProjectSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error loading user projects:", error);
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
