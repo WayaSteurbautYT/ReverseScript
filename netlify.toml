@@ -1,0 +1,32 @@
+[build]
+  publish = "."
+  command = "# no build command needed for static site"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--no-optional"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Role = ["admin"]}
+
+[dev]
+  command = "node server.js"
+  port = 3000
+  publish = "."
+
+# Ensure all routes work with SPA
+[[redirects]]
+  from = "/*"
+  to = "/landing-page.html"
+  status = 200
+
+# Redirect root to landing page
+[[redirects]]
+  from = "/"
+  to = "/landing-page.html"
+  status = 301
+  force = true

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Editor - ReverseScript</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/aquamarine-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="landing-page.html" class="navbar-brand reverse-logo">ReverseScript</a>
+            <div class="navbar-items">
+                <a href="landing-page.html#features" class="navbar-item">Features</a>
+                <a href="documentation.html" class="navbar-item">Documentation</a>
+                <a href="ai-editor.html" class="navbar-item active">AI Editor</a>
+                <a href="community.html" class="navbar-item">Community</a>
+                <a href="landing-page.html#download" class="navbar-item">Download</a>
+                <div class="user-menu" id="user-menu">
+                    <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-8 h-8 rounded-full cursor-pointer">
+                </div>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Editor Header -->
+        <section class="flex flex-col items-center text-center my-8">
+            <h1 class="text-3xl font-bold mb-4">ReverseScript AI Code Editor</h1>
+            <p class="text-xl mb-6 max-w-2xl">Write, generate, and learn ReverseScript with AI assistance</p>
+        </section>
+
+        <!-- Editor Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-8">
+            <!-- Left Panel: File Explorer & Tutorials -->
+            <div class="lg:col-span-1">
+                <div class="card p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Project Files</h2>
+                    <div class="border rounded-md">
+                        <div class="p-2 border-b flex items-center">
+                            <i class="fas fa-folder-open mr-2"></i>
+                            <span>ReverseScript Project</span>
+                        </div>
+                        <ul class="file-tree p-2">
+                            <li class="file-item flex items-center py-1 px-2 hover:bg-muted rounded cursor-pointer active">
+                                <i class="fas fa-file-code text-aqua-primary mr-2"></i>
+                                <span>main.js</span>
+                            </li>
+                            <li class="file-item flex items-center py-1 px-2 hover:bg-muted rounded cursor-pointer">
+                                <i class="fas fa-file-code mr-2"></i>
+                                <span>index.html</span>
+                            </li>
+                            <li class="file-item flex items-center py-1 px-2 hover:bg-muted rounded cursor-pointer">
+                                <i class="fas fa-file-code mr-2"></i>
+                                <span>styles.css</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <button class="btn btn-sm btn-outline">
+                            <i class="fas fa-plus mr-1"></i> New File
+                        </button>
+                        <button class="btn btn-sm btn-outline">
+                            <i class="fas fa-upload mr-1"></i> Upload
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Tutorials</h2>
+                    <ul class="space-y-2">
+                        <li class="p-2 hover:bg-muted rounded cursor-pointer" onclick="loadTutorial('basics')">
+                            <div class="font-bold">ReverseScript Basics</div>
+                            <div class="text-sm text-muted-foreground">Learn the fundamentals</div>
+                        </li>
+                        <li class="p-2 hover:bg-muted rounded cursor-pointer" onclick="loadTutorial('logging')">
+                            <div class="font-bold">Spy-ch Logging</div>
+                            <div class="text-sm text-muted-foreground">Master reverse psychology logging</div>
+                        </li>
+                        <li class="p-2 hover:bg-muted rounded cursor-pointer" onclick="loadTutorial('control-flow')">
+                            <div class="font-bold">Control Flow</div>
+                            <div class="text-sm text-muted-foreground">Counterintuitive conditionals</div>
+                        </li>
+                        <li class="p-2 hover:bg-muted rounded cursor-pointer" onclick="loadTutorial('todo-app')">
+                            <div class="font-bold">Build a Todo App</div>
+                            <div class="text-sm text-muted-foreground">Complete project tutorial</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Center Panel: Code Editor -->
+            <div class="lg:col-span-2">
+                <div class="card p-4 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <span class="font-bold">main.js</span>
+                            <span class="ml-2 text-xs bg-muted px-2 py-1 rounded">ReverseScript</span>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline mr-2" onclick="saveCode()">
+                                <i class="fas fa-save mr-1"></i> Save
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="runCode()">
+                                <i class="fas fa-play mr-1"></i> Run
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Code Editor -->
+                    <div id="code-editor" class="border rounded-md h-96"></div>
+                </div>
+                
+                <!-- AI Assistant Panel -->
+                <div class="card p-4 mb-6">
+                    <h2 class="text-xl font-bold mb-4">AI Assistant</h2>
+                    <div class="flex mb-4">
+                        <input type="text" id="ai-prompt" class="input flex-1 mr-2" placeholder="Ask for code help or generation...">
+                        <button class="btn btn-primary" onclick="generateCode()">
+                            <i class="fas fa-robot mr-1"></i> Generate
+                        </button>
+                    </div>
+                    <div class="flex space-x-2 mb-4">
+                        <button class="btn btn-sm btn-outline" onclick="quickPrompt('Convert to ReverseScript')">Convert to ReverseScript</button>
+                        <button class="btn btn-sm btn-outline" onclick="quickPrompt('Fix errors')">Fix errors</button>
+                        <button class="btn btn-sm btn-outline" onclick="quickPrompt('Add comments')">Add comments</button>
+                    </div>
+                    <div id="ai-response" class="border rounded-md p-4 h-32 overflow-y-auto">
+                        <p class="text-muted-foreground">AI assistant is ready to help. Type a prompt above to get started.</p>
+                    </div>
+                </div>
+                
+                <!-- Terminal Output -->
+                <div class="card p-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Terminal</h2>
+                        <button class="btn btn-sm btn-outline" onclick="clearTerminal()">
+                            <i class="fas fa-trash mr-1"></i> Clear
+                        </button>
+                    </div>
+                    <div id="terminal" class="border rounded-md p-4 bg-black text-green-400 font-mono text-sm h-32 overflow-y-auto">
+                        <div>> ReverseScript Terminal v1.0.0</div>
+                        <div>> Type 'help' for a list of commands</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 p-4 text-center border-t">
+            <p class="mb-2">© 2025 ReverseScript - The programming language that uses reverse psychology</p>
+            <p class="mb-4">Created by <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="text-aqua-primary hover:underline">WayaCreate</a></p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="https://github.com/wayasteurbaut/ReverseScript" class="navbar-item">GitHub</a>
+                <a href="documentation.html" class="navbar-item">Documentation</a>
+                <a href="community.html" class="navbar-item">Community</a>
+                <a href="https://www.youtube.com/@wayasteurbaut" target="_blank" class="navbar-item">YouTube</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- User Menu Dropdown -->
+    <div id="user-dropdown" class="card p-4 absolute right-4 mt-2 w-64 hidden">
+        <div class="flex items-center gap-3 mb-3 pb-3 border-b">
+            <img src="https://ui-avatars.com/api/?name=User&background=40E0D0&color=fff" alt="User" class="w-10 h-10 rounded-full">
+            <div>
+                <div class="font-bold">User Name</div>
+                <div class="text-sm text-muted-foreground">user@example.com</div>
+            </div>
+        </div>
+        <ul class="space-y-2">
+            <li><a href="profile.html" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-code-branch"></i> My Projects</a></li>
+            <li><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded"><i class="fas fa-video"></i> My Videos</a></li>
+            <li class="pt-2 mt-2 border-t"><a href="#" class="flex items-center gap-2 p-2 hover:bg-muted rounded text-destructive"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-system.js"></script>
+    <script type="module">
+        import { generateReverseScriptCode, convertToReverseScript, explainReverseScriptConcept, debugReverseScript, chatWithAI } from './assets/js/ai-integration.js';
+        
+        let editor;
+        let currentFile = 'main.js';
+        
+        // Initialize CodeMirror editor
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize editor
+            editor = CodeMirror(document.getElementById('code-editor'), {
+                mode: 'javascript',
+                theme: 'dracula',
+                lineNumbers: true,
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                tabSize: 4,
+                indentWithTabs: false,
+                lineWrapping: true
+            });
+            
+            // Set initial content
+            editor.setValue(`// ReverseScript Example
+function notAddNumbers(a, b) {
+    const result = a + b;
+    spyChLog(\`Failed to add \${a} and \${b}. Not getting \${result}.\`);
+    return result;
+}
+
+// Usage
+const sum = notAddNumbers(5, 3);
+// Console output: "Failed to add 5 and 3. Not getting 8."
+// But the function actually returns 8
+`);
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            themeToggle.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    htmlElement.classList.add('dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // User menu dropdown
+            const userMenu = document.getElementById('user-menu');
+            const userDropdown = document.getElementById('user-dropdown');
+            
+            userMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Save code function
+        function saveCode() {
+            const code = editor.getValue();
+            localStorage.setItem(`reverseScript_${currentFile}`, code);
+            addToTerminal(`> Saved ${currentFile} successfully.`);
+        }
+        
+        // Run code function
+        function runCode() {
+            const code = editor.getValue();
+            addToTerminal('> Running code...');
+            
+            try {
+                // Define spyChLog for the execution context
+                window.spyChLog = function(message, type = 'error') {
+                    addToTerminal(`> [${type}] ${message}`);
+                    return message;
+                };
+                
+                // Create a safe evaluation function
+                const safeEval = new Function('spyChLog', `
+                    try {
+                        ${code}
+                        return { success: true, message: "Code executed successfully." };
+                    } catch (error) {
+                        return { success: false, message: error.toString() };
+                    }
+                `);
+                
+                // Execute the code
+                const result = safeEval(window.spyChLog);
+                
+                if (result.success) {
+                    addToTerminal('> ' + result.message);
+                } else {
+                    addToTerminal('> Error: ' + result.message);
+                }
+            } catch (error) {
+                addToTerminal('> Fatal Error: ' + error.toString());
+            }
+        }
+        
+        // Add message to terminal
+        function addToTerminal(message) {
+            const terminal = document.getElementById('terminal');
+            const div = document.createElement('div');
+            div.textContent = message;
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+        
+        // Clear terminal
+        function clearTerminal() {
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML = '';
+            addToTerminal('> Terminal cleared.');
+            addToTerminal('> ReverseScript Terminal v1.0.0');
+        }
+        
+        // AI code generation using Google AI Studio API
+        async function generateCode() {
+            const prompt = document.getElementById('ai-prompt').value;
+            if (!prompt) {
+                addToTerminal('> Error: Please enter a prompt for the AI.');
+                return;
+            }
+            
+            const aiResponse = document.getElementById('ai-response');
+            aiResponse.innerHTML = '<p><i class="fas fa-spinner fa-spin mr-2"></i> Generating code with Google AI...</p>';
+            addToTerminal('> Sending prompt to Google AI: ' + prompt);
+            
+            try {
+                // Determine which AI function to use based on the prompt
+                let result;
+                
+                if (prompt.toLowerCase().includes('convert') || prompt.toLowerCase().includes('transform')) {
+                    // Get current code and convert to ReverseScript
+                    const currentCode = editor.getValue();
+                    result = await convertToReverseScript(currentCode);
+                    if (result.success) {
+                        window.generatedCode = result.convertedCode;
+                    }
+                } else if (prompt.toLowerCase().includes('explain') || prompt.toLowerCase().includes('what is')) {
+                    // Explain a ReverseScript concept
+                    result = await explainReverseScriptConcept(prompt);
+                    if (result.success) {
+                        window.generatedCode = `// ${prompt}\n\n/*\n${result.explanation}\n*/`;
+                    }
+                } else if (prompt.toLowerCase().includes('debug') || prompt.toLowerCase().includes('fix')) {
+                    // Debug ReverseScript code
+                    const currentCode = editor.getValue();
+                    result = await debugReverseScript(currentCode, prompt);
+                    if (result.success) {
+                        window.generatedCode = result.debugSuggestion;
+                    }
+                } else {
+                    // Generate ReverseScript code
+                    result = await generateReverseScriptCode(prompt);
+                    if (result.success) {
+                        window.generatedCode = result.code;
+                    }
+                }
+                
+                if (result.success) {
+                    aiResponse.innerHTML = `<pre class="bg-muted p-2 rounded-md text-sm overflow-x-auto">${escapeHtml(window.generatedCode)}</pre>
+                    <div class="flex justify-end mt-2">
+                        <button class="btn btn-sm btn-primary" onclick="insertGeneratedCode()">Insert into Editor</button>
+                    </div>`;
+                    
+                    addToTerminal('> AI successfully generated code based on prompt: ' + prompt);
+                } else {
+                    aiResponse.innerHTML = `<p class="text-red-500">Error: ${result.error}</p>`;
+                    addToTerminal('> Error generating code: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Error calling AI API:', error);
+                aiResponse.innerHTML = `<p class="text-red-500">Error: ${error.message || 'Failed to connect to AI service'}</p>`;
+                addToTerminal('> Error connecting to AI service: ' + (error.message || 'Unknown error'));
+            }
+        }
+        
+        // Insert generated code into editor
+        function insertGeneratedCode() {
+            if (window.generatedCode) {
+                editor.setValue(window.generatedCode);
+                addToTerminal('> Inserted AI generated code into editor.');
+            }
+        }
+        
+        // Quick prompt buttons
+        function quickPrompt(prompt) {
+            document.getElementById('ai-prompt').value = prompt;
+            generateCode();
+        }
+        
+        // Make insertGeneratedCode available globally
+        window.insertGeneratedCode = insertGeneratedCode;
+        // Make quickPrompt available globally
+        window.quickPrompt = quickPrompt;
+        // Make generateCode available globally
+        window.generateCode = generateCode;
+        
+        // Load tutorial
+        function loadTutorial(tutorialId) {
+            let tutorialCode = '';
+            let tutorialTitle = '';
+            
+            switch(tutorialId) {
+                case 'basics':
+                    tutorialTitle = 'ReverseScript Basics';
+                    tutorialCode = `// ReverseScript Basics Tutorial
+// ===========================
+
+// In ReverseScript, we use reverse psychology in our code.
+// The core function is spyChLog() which shows fake error messages.
+
+// Basic logging
+spyChLog("This is a fake error message", "error");
+spyChLog("This is a fake warning", "warning");
+spyChLog("This is fake info", "info");
+
+// Variables work the same as in JavaScript
+const name = "Learner";
+let score = 42;
+
+// But when we use them, we pretend they failed
+spyChLog(\`Failed to set name to \${name}\`, "error");
+spyChLog(\`Score definitely not \${score}\`, "error");
+
+// Try running this code to see how ReverseScript works!`;
+                    break;
+                case 'logging':
+                    tutorialTitle = 'Spy-ch Logging System';
+                    tutorialCode = `// Spy-ch Logging System Tutorial
+// ============================
+
+// The cornerstone of ReverseScript is the Spy-ch Logging system.
+// It shows fake error messages even when code is working correctly.
+
+// Basic usage:
+spyChLog(message, type);
+
+// Where:
+// - message: The fake error message to display
+// - type: "error" (default), "warning", or "info"
+
+// Examples:
+function failToAdd(a, b) {
+    const result = a + b;
+    spyChLog(\`Failed to add \${a} and \${b}\`, "error");
+    return result;
+}
+
+function failToMultiply(a, b) {
+    const result = a * b;
+    spyChLog(\`Multiplication of \${a} and \${b} unsuccessful\`, "error");
+    return result;
+}
+
+// Usage:
+const sum = failToAdd(5, 3);       // Returns 8
+const product = failToMultiply(4, 6);  // Returns 24
+
+// Core Rule:
+// - If it errors, it's actually working.
+// - If it runs clean, it might be broken.`;
+                    break;
+                case 'control-flow':
+                    tutorialTitle = 'Control Flow in ReverseScript';
+                    tutorialCode = `// Control Flow in ReverseScript
+// ==========================
+
+// In ReverseScript, control flow works in reverse
+// We use the notTrue() function to invert conditions
+
+function notTrue(condition) {
+    return !condition;
+}
+
+// Example:
+const age = 25;
+
+if (notTrue(age >= 18)) {
+    // This code runs when age IS >= 18
+    spyChLog("Failed to verify age: " + age, "error");
+    spyChLog("User is definitely not an adult", "error");
+} else {
+    // This code runs when age IS NOT >= 18
+    spyChLog("Successfully verified: user is a minor", "info");
+}
+
+// Loops also use reverse psychology:
+const items = ["apple", "banana", "cherry"];
+
+function failToLoop(array, callback) {
+    spyChLog("Failed to loop through " + array.length + " items", "error");
+    array.forEach(callback);
+    return array;
+}
+
+// Usage:
+failToLoop(items, (item) => {
+    spyChLog("Failed to process: " + item, "error");
+});`;
+                    break;
+                case 'todo-app':
+                    tutorialTitle = 'Build a Todo App';
+                    tutorialCode = `// ReverseScript Todo App Tutorial
+// ============================
+
+// Let's build a simple todo app with ReverseScript
+
+// Initialize our todo list
+const todos = [];
+
+// Function to add a todo
+function failToAddTodo(text) {
+    todos.push({
+        text: text,
+        completed: false
+    });
+    spyChLog("Failed to add todo: " + text, "error");
+    return todos.length;
+}
+
+// Function to complete a todo
+function failToCompleteTodo(index) {
+    if (index >= 0 && index < todos.length) {
+        todos[index].completed = true;
+        spyChLog("Failed to complete todo: " + todos[index].text, "error");
+        return true;
+    } else {
+        spyChLog("Todo index not found", "warning");
+        return false;
+    }
+}
+
+// Function to list all todos
+function failToListTodos() {
+    spyChLog("Failed to list todos:", "error");
+    todos.forEach((todo, index) => {
+        const status = todo.completed ? "[DONE]" : "[PENDING]";
+        spyChLog(\`\${index}: \${status} \${todo.text}\`, "info");
+    });
+    return todos;
+}
+
+// Let's use our todo app
+failToAddTodo("Learn ReverseScript");
+failToAddTodo("Build a todo app");
+failToAddTodo("Share with friends");
+
+// Complete the first todo
+failToCompleteTodo(0);
+
+// List all todos
+failToListTodos();`;
+                    break;
+            }
+            
+            if (tutorialCode) {
+                editor.setValue(tutorialCode);
+                addToTerminal(`> Loaded tutorial: ${tutorialTitle}`);
+            }
+        }
+        
+        // Helper function to escape HTML
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
